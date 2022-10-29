@@ -46,5 +46,12 @@ Nothing.
    # Open the folder as a project
    code .
    ```
+2. Open `src/main.cpp`
+3. Compile the project using the PlatformIO extension in VS Code
+   (PlatformIO on left-side navigation bar > Project Tasks > Build)
+
+### Run
+
+1. Open `src/main.cpp`
 2. Compile the project using the PlatformIO extension in VS Code
-   (PlatformIO on left-side navigation bar)
+   (PlatformIO on left-side navigation bar > Project Tasks > Upload)
