@@ -50,7 +50,7 @@ const float kMotModelKp = 1;    // ?
 const float kMotModelTau = 0.1; // ?
 const float kMotModelLag = 0.0; // ?
 
-const unsigned long kMotCtrlTime = 10000; // (us)
+const unsigned long kMotCtrlTime = 10000UL; // (us)
 
 const float kMotVmax = 12;
 const int kMotPWMmax = 255;
