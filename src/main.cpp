@@ -27,6 +27,7 @@ uint8_t builtin_led_state;
 void processSerialPacket(char channel, uint32_t value, channels_t& obj);
 void serialWrite(uint8_t b);
 void serialRead();
+void checkMotorsTimeout();
 
 
 
@@ -63,13 +64,15 @@ void setup() {
 }
 
 void loop() {
-  static uint32_t blink_led_decimate = 0;
+  static unsigned long blink_led_decimate = 0;
 
   serialRead();
 
   current_micros = micros();
-  if (current_micros - previous_micros >= kMotCtrlTime) {
-
+  if (current_micros - previous_micros >= kMotCtrlTimeUs) {
+    if (kMotCtrlTimeoutEnable) {
+      checkMotorsTimeout();
+    }
 
     if (!timeout) {
       previous_micros = micros();
@@ -78,7 +81,7 @@ void loop() {
 
       // Blink LED
       blink_led_decimate++;
-      if (blink_led_decimate > 20) {
+      if (blink_led_decimate > kMotCtrlLEDOkCount) {
         if (builtin_led_state == LOW) {
           builtin_led_state = HIGH;
         } else {
@@ -139,5 +142,19 @@ void serialRead() {
   if (Serial.available() > 0) {
     serial_byte = Serial.read();
     serial_channels.StateMachine(serial_byte);
+  }
+}
+
+void checkMotorsTimeout() {
+  if (millis() - last_motor_update_millis > kMotCtrlTimeout) {
+    timeout = 1;
+
+    // reset / stop robot
+
+    builtin_led_state = LOW;
+    digitalWrite(LED_BUILTIN, builtin_led_state);
+
+  } else {
+    timeout = 0;
   }
 }

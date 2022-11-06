@@ -50,7 +50,14 @@ const float kMotModelKp = 1;    // ?
 const float kMotModelTau = 0.1; // ?
 const float kMotModelLag = 0.0; // ?
 
-const unsigned long kMotCtrlTime = 10000UL; // (us)
+const unsigned long kMotCtrlFreq = 100UL;  // (Hz)
+const unsigned long kMotCtrlTimeUs = 1000000UL / kMotCtrlFreq; // (us)
+const unsigned long kMotCtrlTimeout = 100UL;  // (ms)
+const uint8_t kMotCtrlTimeoutEnable = 0;
+
+const unsigned long kMotCtrlLEDOkFreq = 4UL;
+const unsigned long kMotCtrlLEDOkCount =
+    1000000UL / kMotCtrlLEDOkFreq / kMotCtrlTimeUs;
 
 const float kMotVmax = 12;
 const int kMotPWMmax = 255;
@@ -67,7 +74,7 @@ const float kMotCtrlPITi = kMotModelTau;
  * Conversion constants
  ******************************************************************************/
 const float kEncImp2MotW =
-    2 * PI * 1000000 / (1.0 * kMotCtrlTime * kMotNgear * kMotEncRes);
+    2 * PI * 1000000 / (1.0 * kMotCtrlTimeUs * kMotNgear * kMotEncRes);
 const float kMotV2MotPWM = kMotPWMmax * 1.0 / kRobotBattVnom;
 
 #endif
