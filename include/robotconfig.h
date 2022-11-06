@@ -37,6 +37,15 @@ const float kRobotBattVnom = 12.0;
 const float kMotNgear = 64;
 const float kMotEncRes = 12;
 
+const int kMotEncPin0A = 22;
+const int kMotEncPin0B = 23;
+const int kMotEncPin1A = 24;
+const int kMotEncPin1B = 25;
+const int kMotEncPin2A = 26;
+const int kMotEncPin2B = 27;
+const int kMotEncPin3A = 28;
+const int kMotEncPin3B = 29;
+
 const float kMotModelKp = 1;    // ?
 const float kMotModelTau = 0.1; // ?
 const float kMotModelLag = 0.0; // ?

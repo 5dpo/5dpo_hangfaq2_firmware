@@ -9,7 +9,15 @@
 #include "robotconfig.h"
 
 void setup() {
-  // put your setup code here, to run once:
+  // Motor encoders
+  pinMode(kMotEncPin0A, INPUT_PULLUP);
+  pinMode(kMotEncPin0B, INPUT_PULLUP);
+  pinMode(kMotEncPin1A, INPUT_PULLUP);
+  pinMode(kMotEncPin1B, INPUT_PULLUP);
+  pinMode(kMotEncPin2A, INPUT_PULLUP);
+  pinMode(kMotEncPin2B, INPUT_PULLUP);
+  pinMode(kMotEncPin3A, INPUT_PULLUP);
+  pinMode(kMotEncPin3B, INPUT_PULLUP);
 }
 
 void loop() {
