@@ -23,11 +23,21 @@ Nothing.
 
 **Robot > PC**
 
-- `[]`: 
+- `[g]`: encoders total count of motor 0 (ticks)
+- `[h]`: encoders total count of motor 1 (ticks)
+- `[i]`: encoders total count of motor 2 (ticks)
+- `[j]`: encoders total count of motor 3 (ticks)
+- `[r]`: reset signal
 
 **PC > Robot**
 
-- `[]`: 
+- `[G]`: reference angular speed of motor 0 (rad/s)
+- `[H]`: reference angular speed of motor 1 (rad/s)
+- `[I]`: reference angular speed of motor 2 (rad/s)
+- `[J]`: reference angular speed of motor 3 (rad/s)
+- `[K]`: PWM value of motors
+  - `(value >> 24) & 0x03`: motor index (0..3)
+  - `value & 0xFFFF`: PWM value (0..`kMotPWMmax`)
 
 ## Usage
 
