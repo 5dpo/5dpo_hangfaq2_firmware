@@ -6,6 +6,8 @@
 #include <SPI.h>
 #include <Adafruit_MotorShield.h>
 
+#include "robotconfig.h"
+
 void setup() {
   // put your setup code here, to run once:
 }
