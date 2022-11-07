@@ -8,16 +8,21 @@
 
 #include <channels.h>
 
-#include "robotconfig.h"
+#include "Robot.h"
 
 /******************************************************************************
  * GLOBAL VARIABLES
  ******************************************************************************/
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+
 unsigned long current_micros = 0, previous_micros = 0;
 unsigned long last_motor_update_millis = 0;
 uint8_t timeout = 0;
 channels_t serial_channels;
 uint8_t builtin_led_state;
+
+Robot robot;
+Encoder encoders[4];
 
 
 
@@ -35,6 +40,8 @@ void checkMotorsTimeout();
  * IMPLEMENTATION
  ******************************************************************************/
 void setup() {
+  uint8_t i;
+
   // Built-in LED
   builtin_led_state = LOW;
   pinMode(LED_BUILTIN, OUTPUT);
@@ -50,12 +57,27 @@ void setup() {
   pinMode(kMotEncPin3A, INPUT_PULLUP);
   pinMode(kMotEncPin3B, INPUT_PULLUP);
 
+  updateEncodersState();
+  for (i = 0; i < 4; i++) {
+    encoders[i].delta = 0;
+  }
+
+  Timer1.attachInterrupt(updateEncodersState);
+  Timer1.initialize(50);  // calls every 50us
+
   // Serial communication
   Serial.begin(115200);
   serial_channels.init(processSerialPacket, serialWrite);
 
   // Reset signal
   serial_channels.send('r', 0);
+
+  // Motors
+  for (i = 0; i < 4; i++) {
+    robot.mot[i].ptr = AFMS.getMotor(i + 1);
+    robot.mot[i].enable = true;
+    //robot.mot[i].setPWM(0);
+  }
 
   // Initialization
   current_micros = micros();

@@ -60,7 +60,7 @@ const unsigned long kMotCtrlLEDOkCount =
     1000000UL / kMotCtrlLEDOkFreq / kMotCtrlTimeUs;
 
 const float kMotVmax = 12;
-const int kMotPWMmax = 255;
+const int16_t kMotPWMmax = 255;
 
 const float kMotHammV0 = 0;
 const float kMotHammVd = 0;

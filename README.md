@@ -1,14 +1,18 @@
 # 5dpo_q2_firmware
 
-**Version 0.0.0**
+**Version 0.1.0**
 
-Nothing.
+- Serial communication using the library channels
+- Encoders update (_Not tested_)
 
 **With this version, it is possible to do:**
 
-- Serial communication using the library channels
 - Motors angular speed control
 - Motors PWM control
+
+**Bugs identified in the current version:**
+
+- `Motor::setPWM` leads to being stuck in `setup()`
 
 ## Hardware
 
