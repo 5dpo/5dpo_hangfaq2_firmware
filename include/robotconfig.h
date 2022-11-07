@@ -65,10 +65,10 @@ const int kMotPWMmax = 255;
 const float kMotHammV0 = 0;
 const float kMotHammVd = 0;
 
-const float kMotCtrlPITauCl = kMotModelTau / 1.5;
-const float kMotCtrlPIKcKp = kMotModelTau / (kMotCtrlPITauCl + kMotModelLag);
-const float kMotCtrlPIKc = kMotCtrlPIKcKp / kMotModelKp;
-const float kMotCtrlPITi = kMotModelTau;
+const float kMotCtrlTauCl = kMotModelTau / 1.5;
+const float kMotCtrlKcKp = kMotModelTau / (kMotCtrlTauCl + kMotModelLag);
+const float kMotCtrlKc = kMotCtrlKcKp / kMotModelKp;
+const float kMotCtrlTi = kMotModelTau;
 
 /******************************************************************************
  * Conversion constants
