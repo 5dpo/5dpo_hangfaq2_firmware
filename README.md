@@ -31,6 +31,7 @@
 - `[h]`: encoders total count of motor 1 (ticks)
 - `[i]`: encoders total count of motor 2 (ticks)
 - `[j]`: encoders total count of motor 3 (ticks)
+- `[k]`: interval time between control cycles (us)
 - `[r]`: reset signal
 
 **PC > Robot**

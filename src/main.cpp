@@ -31,6 +31,7 @@ Encoder encoders[4];
  ******************************************************************************/
 void processSerialPacket(char channel, uint32_t value, channels_t& obj);
 void serialWrite(uint8_t b);
+void serialWriteChannel(char channel, int32_t value);
 void serialRead();
 void checkMotorsTimeout();
 
@@ -69,15 +70,18 @@ void setup() {
   Serial.begin(115200);
   serial_channels.init(processSerialPacket, serialWrite);
 
-  // Reset signal
-  serial_channels.send('r', 0);
-
   // Motors
   for (i = 0; i < 4; i++) {
     robot.mot[i].ptr = AFMS.getMotor(i + 1);
     robot.mot[i].enable = true;
     //robot.mot[i].setPWM(0);
   }
+
+  // Robot
+  robot.init(serialWriteChannel, encoders);
+
+  // Reset signal
+  serialWriteChannel('r', 0);
 
   // Initialization
   current_micros = micros();
@@ -87,23 +91,27 @@ void setup() {
 
 void loop() {
   static unsigned long blink_led_decimate = 0;
+  int32_t delta;
 
   serialRead();
 
   current_micros = micros();
-  if (current_micros - previous_micros >= kMotCtrlTimeUs) {
+  delta = current_micros - previous_micros;
+  if (delta > kMotCtrlTimeUs) {
     if (kMotCtrlTimeoutEnable) {
       checkMotorsTimeout();
     }
 
     if (!timeout) {
-      previous_micros = micros();
+      previous_micros = current_micros;
       
-      // do things
+      // Update and send data
+      robot.update(delta);
+      robot.send();
 
       // Blink LED
       blink_led_decimate++;
-      if (blink_led_decimate > kMotCtrlLEDOkCount) {
+      if (blink_led_decimate >= kMotCtrlLEDOkCount) {
         if (builtin_led_state == LOW) {
           builtin_led_state = HIGH;
         } else {
@@ -156,6 +164,10 @@ void processSerialPacket(char channel, uint32_t value, channels_t& obj) {
 
 void serialWrite(uint8_t b) {
   Serial.write(b);
+}
+
+void serialWriteChannel(char channel, int32_t value) {
+  serial_channels.send(channel, value);
 }
 
 void serialRead() {
