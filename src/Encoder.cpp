@@ -38,7 +38,7 @@ void Encoder::updateDelta(uint8_t &new_state) {
 void Encoder::updateTick(void) {
   tick_last = tick;
   cli();
-  tick += (uint16_t) delta;
+  tick += delta;
   delta = 0;
   sei();
 }
