@@ -74,7 +74,7 @@ void setup() {
   for (i = 0; i < 4; i++) {
     robot.mot[i].ptr = AFMS.getMotor(i + 1);
     robot.mot[i].enable = true;
-    robot.mot[i].setPWM(0);
+    //robot.mot[i].setPWM(0);
   }
 
   // Robot

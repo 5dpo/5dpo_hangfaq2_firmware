@@ -1,27 +1,40 @@
 # 5dpo_q2_firmware
 
-**Version 0.1.0**
+This repository implements the firmware relative to the Hangfa Discovery Q2
+four-wheeled omnidirectional robotic platform.
 
-- Serial communication using the library channels
-- Encoders update (_Not tested_)
+**Version 1.0.0**
 
 **With this version, it is possible to do:**
 
-- Motors angular speed control
+- Serial communication using the library channels
+- Read encoders channel A and B for wheeled odometry
+- Motors angular speed control with a generic PID controller
 - Motors PWM control
+
+**The next version will add these features:**
+
+- Test the firmware
+- Fix the identified bugs
 
 **Bugs identified in the current version:**
 
+- Set PWM does not work when turning on the Arduino Mega (only tested without
+  the shield)
+  - `main.cpp:L77`: commented to allow correct execution
+  - 
 - `Motor::setPWM` leads to being stuck in `setup()`
 
 ## Hardware
 
 - Robot Platform Hangfa Discovery Q2
+  ([info](http://www.hangfa.com/EN/robot/DiscoveryQ2.html))
 - Faulhaber DC Motor 2342L012CR_M124-Y2002_257
   ([datasheet](https://www.faulhaber.com/fileadmin/Import/Media/EN_2342_CR_DFF.pdf))
 - Arduino Mega 2560 Rev3
 - Adafruit Motor Shield V2
 - Li-Ion 18650 BMS Charger PCB, 3S 12.6V 20A
+- Tattu 11.1V 15C 3S 10000mAh Lipo Battery Pack
 
 ## Serial Communication (channels)
 
