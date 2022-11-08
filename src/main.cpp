@@ -148,8 +148,10 @@ void processSerialPacket(char channel, uint32_t value, channels_t& obj) {
       mot_i = channel - 'G';
       // set reference angular speed for the motors
 #ifdef CONFIG_LAZARUS
+      robot.setMotorWref(mot_i, ((int32_t) value) * kEncImp2MotW );
 #endif
 #ifdef CONFIG_ROS
+      robot.setMotorWref(mot_i, *((float*) &value) );
 #endif
       break;
   
@@ -157,7 +159,7 @@ void processSerialPacket(char channel, uint32_t value, channels_t& obj) {
     case 'K':
       mot_i = (value >> 24) & 0x03;
       pwm = value & 0xFFFF;
-      // set motors pwm value
+      robot.setMotorPWM(mot_i, pwm);
       break;
   }
 }

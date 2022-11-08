@@ -14,6 +14,8 @@ class CtrlPID {
   void update(float new_w_ref, float new_w);
   void reset(void);
 
+  void enable(bool e);
+
  private:
   void hammerstein(float &mmot);
 };

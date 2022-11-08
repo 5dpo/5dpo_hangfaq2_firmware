@@ -50,6 +50,13 @@ void CtrlPID::reset(void) {
   m = 0;
 }
 
+void CtrlPID::enable(bool e) {
+  if (active != e) {
+    active = e;
+    reset();
+  }
+}
+
 void CtrlPID::hammerstein(float &mmot) {
   if (mmot > hamm_vd) {
     mmot = (mmot - hamm_vd) + hamm_v0;

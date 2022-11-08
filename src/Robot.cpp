@@ -61,3 +61,14 @@ void Robot::send(void) {
 
   (*serialWriteChannel)('k', dt);
 }
+
+void Robot::setMotorWref(uint8_t index, float new_w_r) {
+  pid[index].enable(true);
+  pid[index].w_ref = new_w_r;
+}
+
+void Robot::setMotorPWM(uint8_t index, int16_t pwm) {
+  pid[index].enable(false);
+
+  // set motor pwm
+}

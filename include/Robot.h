@@ -22,6 +22,9 @@ class Robot {
 
   void update(int32_t &delta);
   void send(void);
+
+  void setMotorWref(uint8_t index, float new_w_r);
+  void setMotorPWM(uint8_t index, int16_t pwm);
 };
 
 #endif
