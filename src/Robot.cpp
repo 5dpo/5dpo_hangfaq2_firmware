@@ -44,12 +44,14 @@ void Robot::update(uint32_t &delta) {
 
   // Controllers
   for (i = 0; i < 4; i++) {
-    // update motors velocities (w=imp * IMP2W) > update PID
+    pid[i].update(enc[i].odo * kEncImp2MotW);
   }
 
   // Actuators
   for (i = 0; i < 4; i++) {
-    // set motor pwm
+    if (pid[i].active) {
+      mot[i].setPWM( round( kMotV2MotPWM * pid[i].m ) );
+    }
   }
 }
 
@@ -69,6 +71,5 @@ void Robot::setMotorWref(uint8_t index, float new_w_r) {
 
 void Robot::setMotorPWM(uint8_t index, int16_t pwm) {
   pid[index].enable(false);
-
-  // set motor pwm
+  mot[index].setPWM(pwm);
 }
