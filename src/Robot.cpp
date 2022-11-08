@@ -13,7 +13,7 @@ void Robot::init(
 
   // Controllers
   for (i = 0; i < 4; i++) {
-    pid[i].active = true;
+    pid[i].active = false;
     pid[i].kp = kMotCtrlKc;
     if (kMotCtrlTi == 0) {
       pid[i].ki = 0;
