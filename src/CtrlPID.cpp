@@ -56,13 +56,13 @@ void CtrlPID::enable(bool e) {
 void CtrlPID::hammerstein(float &mmot) {
   if (mmot > hamm_vd) {
     mmot = (mmot - hamm_vd) + hamm_v0;
-  } else if (mmot > -hamm_vd) {
+  } else if (mmot <= -hamm_vd) {
+    mmot = (mmot + hamm_vd) - hamm_v0;
+  } else {
     if (hamm_vd != 0 ) {
       mmot = mmot * hamm_v0 / hamm_vd;
     } else {
       mmot = 0;
     }
-  } else {
-    mmot = (mmot + hamm_vd) - hamm_v0;
   }
 }
