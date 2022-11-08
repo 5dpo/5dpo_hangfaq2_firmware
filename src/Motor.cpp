@@ -4,7 +4,7 @@ void Motor::setPWM(int16_t new_pwm) {
   // Saturation
   if (new_pwm > kMotPWMmax) {
     new_pwm = kMotPWMmax;
-  } else {
+  } else if (new_pwm < -kMotPWMmax) {
     new_pwm = -kMotPWMmax;
   }
 
