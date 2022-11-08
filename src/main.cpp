@@ -17,7 +17,7 @@ Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 
 unsigned long current_micros = 0, previous_micros = 0;
 unsigned long last_motor_update_millis = 0;
-uint8_t timeout = 0;
+bool timeout = false;
 channels_t serial_channels;
 uint8_t builtin_led_state;
 
@@ -74,7 +74,7 @@ void setup() {
   for (i = 0; i < 4; i++) {
     robot.mot[i].ptr = AFMS.getMotor(i + 1);
     robot.mot[i].enable = true;
-    //robot.mot[i].setPWM(0);
+    robot.mot[i].setPWM(0);
   }
 
   // Robot
@@ -183,14 +183,18 @@ void serialRead() {
 
 void checkMotorsTimeout() {
   if (millis() - last_motor_update_millis > kMotCtrlTimeout) {
-    timeout = 1;
+    timeout = true;
 
-    // reset / stop robot
+    robot.stop();
 
     builtin_led_state = LOW;
     digitalWrite(LED_BUILTIN, builtin_led_state);
 
   } else {
+    if (timeout) {
+      robot.init(serialWriteChannel, encoders);
+    }
+
     timeout = 0;
   }
 }
