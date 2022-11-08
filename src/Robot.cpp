@@ -33,7 +33,7 @@ void Robot::init(
   }
 }
 
-void Robot::update(int32_t &delta) {
+void Robot::update(uint32_t &delta) {
   uint8_t i;
   dt = delta;
 

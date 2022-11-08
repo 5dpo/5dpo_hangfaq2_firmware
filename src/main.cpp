@@ -91,7 +91,7 @@ void setup() {
 
 void loop() {
   static unsigned long blink_led_decimate = 0;
-  int32_t delta;
+  uint32_t delta;
 
   serialRead();
 

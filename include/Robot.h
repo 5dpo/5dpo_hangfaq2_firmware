@@ -8,7 +8,7 @@
 
 class Robot {
  public:
-  int32_t dt;
+  uint32_t dt;
   Encoder *enc;
   Motor mot[4];
   CtrlPID pid[4];
@@ -20,7 +20,7 @@ class Robot {
       void (*serialWriteChannelFunction)(char c, int32_t v),
       Encoder *new_enc);
 
-  void update(int32_t &delta);
+  void update(uint32_t &delta);
   void send(void);
 
   void setMotorWref(uint8_t index, float new_w_r);
