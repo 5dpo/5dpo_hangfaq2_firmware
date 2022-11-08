@@ -1,12 +1,11 @@
 #include "CtrlPID.h"
 
-void CtrlPID::update(float new_w_ref, float new_w) {
+void CtrlPID::update(float new_w) {
   if (active) {
     float e_der, e_sum_tmp;
 
     // Current angular velocity
     w = new_w;
-    w_ref = new_w_ref;
 
     // Error
     e_prev = e;
@@ -36,12 +35,9 @@ void CtrlPID::update(float new_w_ref, float new_w) {
     // Saturation
     if (m > m_max) {
       m = m_max;
-    } else {
+    } else if (m < -m_max) {
       m = -m_max;
     }
-
-  } else {
-    reset();
   }
 }
 
