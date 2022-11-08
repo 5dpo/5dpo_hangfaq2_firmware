@@ -7,9 +7,10 @@ void updateEncodersState(void);
 
 class Encoder {
  public:
-  uint16_t tick = 0;
-  uint16_t tick_last = 0;
+  uint32_t tick = 0;
+  uint32_t tick_last = 0;
   volatile int16_t delta;
+  int32_t odo;
   uint8_t state;
 
  public:
