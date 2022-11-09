@@ -3,7 +3,7 @@
 This repository implements the firmware relative to the Hangfa Discovery Q2
 four-wheeled omnidirectional robotic platform.
 
-**Version 1.0.0**
+**Version 1.0.1**
 
 **With this version, it is possible to do:**
 
@@ -19,11 +19,8 @@ four-wheeled omnidirectional robotic platform.
 
 **Bugs identified in the current version:**
 
-- Set PWM does not work when turning on the Arduino Mega (only tested without
-  the shield)
-  - `main.cpp:L77`: commented to allow correct execution
-  - 
-- `Motor::setPWM` leads to being stuck in `setup()`
+- Read encoders channel A and B for wheeled odometry does not work
+  - Counter stays always at 0
 
 ## Hardware
 
