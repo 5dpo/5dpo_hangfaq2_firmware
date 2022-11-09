@@ -11,11 +11,11 @@ void Motor::setPWM(int16_t new_pwm) {
   // Set pwm
   if (enable) {
     if (new_pwm >= 0) {
-      ptr->setSpeed(new_pwm);
+      ptr->setSpeed((uint8_t) new_pwm);
       ptr->run(FORWARD);
 
     } else {
-      ptr->setSpeed(abs(new_pwm));
+      ptr->setSpeed((uint8_t) abs(new_pwm));
       ptr->run(BACKWARD);
     }
 
