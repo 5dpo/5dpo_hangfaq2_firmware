@@ -35,7 +35,7 @@ const float kRobotBattVnom = 11.1;    //!< nominal battery level (V)
  * - controllers parameters
  ******************************************************************************/
 const float kMotNgear  = 64;      //!< gear reduction ratio (n:1)
-const float kMotEncRes = 12;      //!< encoder resolution (ticks per rev.)
+const float kMotEncRes = 12*4;    //!< encoder resolution (tick count per rev.)
 
 const uint8_t kMotEncPin0A = 22;  //!< encoder channel A of back-right wheel
 const uint8_t kMotEncPin0B = 23;  //!< encoder channel B of back-right wheel

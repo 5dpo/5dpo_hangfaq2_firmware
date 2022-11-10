@@ -3,7 +3,7 @@
 This repository implements the firmware relative to the Hangfa Discovery Q2
 four-wheeled omnidirectional robotic platform.
 
-**Version 1.0.2**
+**Version 1.0.3**
 
 **With this version, it is possible to do:**
 
