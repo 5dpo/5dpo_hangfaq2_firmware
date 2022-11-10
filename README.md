@@ -3,7 +3,7 @@
 This repository implements the firmware relative to the Hangfa Discovery Q2
 four-wheeled omnidirectional robotic platform.
 
-**Version 1.0.1**
+**Version 1.0.2**
 
 **With this version, it is possible to do:**
 
@@ -14,13 +14,11 @@ four-wheeled omnidirectional robotic platform.
 
 **The next version will add these features:**
 
-- Test the firmware
-- Fix the identified bugs
+- Tune the PID controllers for angular speed control of the motors
 
 **Bugs identified in the current version:**
 
-- Read encoders channel A and B for wheeled odometry does not work
-  - Counter stays always at 0
+- None
 
 ## Hardware
 
