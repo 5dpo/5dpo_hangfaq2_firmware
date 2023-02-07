@@ -1,7 +1,6 @@
 #include <Arduino.h>
 
 #include <TimerOne.h>
-#include <Wire.h>
 
 #include <SPI.h>
 #include <Adafruit_MotorShield.h>
