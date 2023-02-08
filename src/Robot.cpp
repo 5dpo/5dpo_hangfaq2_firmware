@@ -7,21 +7,19 @@ void Robot::init(void (*serialWriteChannelFunction)(char c, int32_t v)) {
   serialWriteChannel = serialWriteChannelFunction;
 
   // Encoders
-  pinMode(kMotEncPin0A, INPUT_PULLUP);
-  pinMode(kMotEncPin0B, INPUT_PULLUP);
-  pinMode(kMotEncPin1A, INPUT_PULLUP);
-  pinMode(kMotEncPin1B, INPUT_PULLUP);
-  pinMode(kMotEncPin2A, INPUT_PULLUP);
-  pinMode(kMotEncPin2B, INPUT_PULLUP);
-  pinMode(kMotEncPin3A, INPUT_PULLUP);
-  pinMode(kMotEncPin3B, INPUT_PULLUP);
-
+  initEnc();
   updateEncodersState();
   for (i = 0; i < 4; i++) {
     encoders[i].delta = 0;
   }
   Timer1.attachInterrupt(updateEncodersState);
   Timer1.initialize(20);  // calls every X us
+
+  // Motors
+  Timer3.initialize(20);
+  for (i = 0; i < 4; i++) {
+    mot[i].init(kMotDirPin[i], kMotPwmPin[i]);
+  }
 
   // Controllers
   for (i = 0; i < 4; i++) {
@@ -76,6 +74,17 @@ void Robot::setMotorWref(uint8_t index, float new_w_r) {
 void Robot::setMotorPWM(uint8_t index, int16_t pwm) {
   pid[index].enable(false);
   mot[index].setPWM(pwm);
+}
+
+void Robot::initEnc() {
+  pinMode(kMotEncPin0A, INPUT_PULLUP);
+  pinMode(kMotEncPin0B, INPUT_PULLUP);
+  pinMode(kMotEncPin1A, INPUT_PULLUP);
+  pinMode(kMotEncPin1B, INPUT_PULLUP);
+  pinMode(kMotEncPin2A, INPUT_PULLUP);
+  pinMode(kMotEncPin2B, INPUT_PULLUP);
+  pinMode(kMotEncPin3A, INPUT_PULLUP);
+  pinMode(kMotEncPin3B, INPUT_PULLUP);
 }
 
 void Robot::initCtrlPID(uint8_t index) {

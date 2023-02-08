@@ -26,6 +26,7 @@ class Robot {
   void setMotorPWM(uint8_t index, int16_t pwm);
 
  private:
+  void initEnc();
   void initCtrlPID(uint8_t index);
 };
 

@@ -1,8 +1,5 @@
 #include <Arduino.h>
 
-#include <SPI.h>
-#include <Adafruit_MotorShield.h>
-
 #include <channels.h>
 
 #include "Robot.h"
@@ -10,13 +7,11 @@
 /******************************************************************************
  * GLOBAL VARIABLES
  ******************************************************************************/
-Adafruit_MotorShield AFMS = Adafruit_MotorShield();
-
 unsigned long current_micros = 0, previous_micros = 0;
 unsigned long last_motor_update_millis = 0;
 bool timeout = false;
 channels_t serial_channels;
-uint8_t builtin_led_state;
+//uint8_t builtin_led_state;
 
 Robot robot;
 Encoder *encoders = robot.enc;
@@ -38,12 +33,11 @@ void checkMotorsTimeout();
  * IMPLEMENTATION
  ******************************************************************************/
 void setup() {
-  uint8_t i;
-
   // Built-in LED
-  builtin_led_state = LOW;
+  // NOT IN USE: same pin as BR_DIR!!!!!
+  /*builtin_led_state = LOW;
   pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LED_BUILTIN, builtin_led_state);
+  digitalWrite(LED_BUILTIN, builtin_led_state);*/
 
   // Robot
   robot.init(serialWriteChannel);
@@ -52,16 +46,14 @@ void setup() {
   Serial.begin(115200);
   serial_channels.init(processSerialPacket, serialWrite);
 
-  // Motors
-  AFMS.begin();
-  for (i = 0; i < 4; i++) {
-    robot.mot[i].ptr = AFMS.getMotor(i + 1);
-    robot.mot[i].enable = true;
-    robot.mot[i].setPWM(0);
-  }
-
   // Reset signal
   serialWriteChannel('r', 0);
+
+  // Test PWM motors
+  /*robot.setMotorPWM(0, -512);
+  robot.setMotorPWM(1, -512);
+  robot.setMotorPWM(2, -512);
+  robot.setMotorPWM(3, -512);*/
 
   // Initialization
   current_micros = micros();
@@ -70,7 +62,7 @@ void setup() {
 }
 
 void loop() {
-  static unsigned long blink_led_decimate = 0;
+  //static unsigned long blink_led_decimate = 0;
   uint32_t delta;
 
   serialRead();
@@ -90,7 +82,7 @@ void loop() {
       robot.send();
 
       // Blink LED
-      blink_led_decimate++;
+      /*blink_led_decimate++;
       if (blink_led_decimate >= kMotCtrlLEDOkCount) {
         if (builtin_led_state == LOW) {
           builtin_led_state = HIGH;
@@ -99,7 +91,7 @@ void loop() {
         }
         digitalWrite(LED_BUILTIN, builtin_led_state);
         blink_led_decimate = 0;
-      }
+      }*/
     }
   }
 }
@@ -167,8 +159,8 @@ void checkMotorsTimeout() {
 
     robot.stop();
 
-    builtin_led_state = LOW;
-    digitalWrite(LED_BUILTIN, builtin_led_state);
+    /*builtin_led_state = LOW;
+    digitalWrite(LED_BUILTIN, builtin_led_state);*/
 
   } else {
     if (timeout) {

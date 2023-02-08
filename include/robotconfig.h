@@ -3,6 +3,9 @@
 
 #include <Arduino.h>
 
+#include <TimerOne.h>
+#include <TimerThree.h>
+
 /******************************************************************************
  * Configuration (uncomment the appropriate configuration)
  * - Lazarus-based applications (original channels implementation)
@@ -46,6 +49,19 @@ const uint8_t kMotEncPin2B = 27;  //!< encoder channel B of front-right wheel
 const uint8_t kMotEncPin3A = 28;  //!< encoder channel A of front-left wheel
 const uint8_t kMotEncPin3B = 29;  //!< encoder channel B of front-left wheel
 
+const int kMotDirPin[] = {
+  13,   //!< back-right wheel
+  10,   //!< back-left  wheel
+   4,   //!< front-right wheel
+   2    //!< front-left  wheel
+};
+const int kMotPwmPin[] = {
+  TIMER1_B_PIN,   //!< back-right wheel
+  TIMER1_A_PIN,   //!< back-left  wheel
+  TIMER3_A_PIN,   //!< front-right wheel
+  TIMER3_C_PIN    //!< front-left  wheel
+};
+
 const float kMotModelKp  = 1.000;     //!< gain (rad.s^(-1) / V)
 const float kMotModelTau = 0.100;     //!< time constant (s)
 const float kMotModelLag = 0.000;     //!< lag lag (s)
@@ -61,7 +77,7 @@ const unsigned long kMotCtrlLEDOkCount =
     1000000UL / kMotCtrlLEDOkFreq / kMotCtrlTimeUs / 2;
 
 const float kMotVmax = 12;          //!< maximum voltage appliable to motors (V)
-const int16_t kMotPWMmax = 255;     //!< maximum PWM (0..1024)
+const int16_t kMotPWMmax = 1023;    //!< maximum PWM (0..1023)
 
 const float kMotHammV0 = 0;         //!< estimated motors' deadzone (V)
 const float kMotHammVd = 0;         //!< compensated motors' deadzone (V)
