@@ -1,5 +1,23 @@
 #include "Motor.h"
 
+void Motor::init(const int pin_dir, const int pin_pwm) {
+  dir_pin = pin_dir;
+  pwm_pin = pin_pwm;
+
+  pinMode(dir_pin, OUTPUT);
+  pinMode(pwm_pin, OUTPUT);
+
+  enable = true;
+  setPWM(0);
+
+  if ((pwm_pin == TIMER3_A_PIN) || (pwm_pin == TIMER3_B_PIN) ||
+      (pwm_pin == TIMER3_C_PIN)) {
+    Timer3.pwm(pwm_pin, 0);
+  } else if ((pwm_pin == TIMER1_A_PIN) || (pwm_pin == TIMER1_B_PIN)) {
+    Timer1.pwm(pwm_pin, 0);
+  }
+}
+
 void Motor::setPWM(int16_t new_pwm) {
   // Saturation
   if (new_pwm > kMotPWMmax) {
@@ -11,15 +29,31 @@ void Motor::setPWM(int16_t new_pwm) {
   // Set pwm
   if (enable) {
     if (new_pwm >= 0) {
-      ptr->setSpeed((uint8_t) new_pwm);
-      ptr->run(FORWARD);
+      digitalWrite(dir_pin, 0);
 
+      if ((pwm_pin == TIMER3_A_PIN) || (pwm_pin == TIMER3_B_PIN) ||
+          (pwm_pin == TIMER3_C_PIN)) {
+        Timer3.setPwmDuty(pwm_pin, new_pwm);
+      } else if ((pwm_pin == TIMER1_A_PIN) || (pwm_pin == TIMER1_B_PIN)) {
+        Timer1.setPwmDuty(pwm_pin, new_pwm);
+      }
     } else {
-      ptr->setSpeed((uint8_t) abs(new_pwm));
-      ptr->run(BACKWARD);
+      digitalWrite(dir_pin, 1);
+      
+      if ((pwm_pin == TIMER3_A_PIN) || (pwm_pin == TIMER3_B_PIN) ||
+          (pwm_pin == TIMER3_C_PIN)) {
+        Timer3.setPwmDuty(pwm_pin, -new_pwm);
+      } else if ((pwm_pin == TIMER1_A_PIN) || (pwm_pin == TIMER1_B_PIN)) {
+        Timer1.setPwmDuty(pwm_pin, -new_pwm);
+      }
     }
 
   } else {
-    ptr->run(RELEASE);
+    if ((pwm_pin == TIMER3_A_PIN) || (pwm_pin == TIMER3_B_PIN) ||
+        (pwm_pin == TIMER3_C_PIN)) {
+      Timer3.setPwmDuty(pwm_pin, 0);
+    } else if ((pwm_pin == TIMER1_A_PIN) || (pwm_pin == TIMER1_B_PIN)) {
+      Timer1.setPwmDuty(pwm_pin, 0);
+    }
   }
 }
