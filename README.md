@@ -10,7 +10,9 @@ four-wheeled omnidirectional robotic platform.
 - Serial communication using the library channels
 - Read encoders channel A and B for wheeled odometry
 - Motors angular speed control with a generic PID controller
-- Motors PWM control (TimerOne and TimerThree PWM)
+- Motors PWM control
+  ([TimerOne](https://github.com/PaulStoffregen/TimerOne) and
+  [TimerThree](https://github.com/PaulStoffregen/TimerThree) PWM)
 
 **The next version will add these features:**
 
@@ -18,7 +20,8 @@ four-wheeled omnidirectional robotic platform.
 
 **Bugs identified in the current version:**
 
-- None
+- When wheels are turning fast, the tick counter seems to not be working
+  properly
 
 ## Hardware
 
