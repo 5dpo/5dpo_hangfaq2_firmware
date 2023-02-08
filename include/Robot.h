@@ -9,16 +9,14 @@
 class Robot {
  public:
   uint32_t dt;
-  Encoder *enc;
+  Encoder enc[4];
   Motor mot[4];
   CtrlPID pid[4];
 
   void (*serialWriteChannel)(char channel, int32_t value);
 
  public:
-  void init(
-      void (*serialWriteChannelFunction)(char c, int32_t v),
-      Encoder *new_enc);
+  void init(void (*serialWriteChannelFunction)(char c, int32_t v));
 
   void update(uint32_t &delta);
   void send(void);
@@ -26,6 +24,9 @@ class Robot {
 
   void setMotorWref(uint8_t index, float new_w_r);
   void setMotorPWM(uint8_t index, int16_t pwm);
+
+ private:
+  void initCtrlPID(uint8_t index);
 };
 
 #endif

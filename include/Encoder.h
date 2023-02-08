@@ -18,6 +18,6 @@ class Encoder {
   void updateTick(void);
 };
 
-extern Encoder encoders[4];
+extern Encoder *encoders;
 
 #endif

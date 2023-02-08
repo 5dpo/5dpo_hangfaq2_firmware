@@ -1,7 +1,5 @@
 #include <Arduino.h>
 
-#include <TimerOne.h>
-
 #include <SPI.h>
 #include <Adafruit_MotorShield.h>
 
@@ -21,7 +19,7 @@ channels_t serial_channels;
 uint8_t builtin_led_state;
 
 Robot robot;
-Encoder encoders[4];
+Encoder *encoders = robot.enc;
 
 
 
@@ -47,23 +45,8 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, builtin_led_state);
 
-  // Motor encoders
-  pinMode(kMotEncPin0A, INPUT_PULLUP);
-  pinMode(kMotEncPin0B, INPUT_PULLUP);
-  pinMode(kMotEncPin1A, INPUT_PULLUP);
-  pinMode(kMotEncPin1B, INPUT_PULLUP);
-  pinMode(kMotEncPin2A, INPUT_PULLUP);
-  pinMode(kMotEncPin2B, INPUT_PULLUP);
-  pinMode(kMotEncPin3A, INPUT_PULLUP);
-  pinMode(kMotEncPin3B, INPUT_PULLUP);
-
-  updateEncodersState();
-  for (i = 0; i < 4; i++) {
-    encoders[i].delta = 0;
-  }
-
-  Timer1.attachInterrupt(updateEncodersState);
-  Timer1.initialize(20);  // calls every X us
+  // Robot
+  robot.init(serialWriteChannel);
 
   // Serial communication
   Serial.begin(115200);
@@ -76,9 +59,6 @@ void setup() {
     robot.mot[i].enable = true;
     robot.mot[i].setPWM(0);
   }
-
-  // Robot
-  robot.init(serialWriteChannel, encoders);
 
   // Reset signal
   serialWriteChannel('r', 0);
@@ -192,7 +172,7 @@ void checkMotorsTimeout() {
 
   } else {
     if (timeout) {
-      robot.init(serialWriteChannel, encoders);
+      robot.init(serialWriteChannel);
     }
 
     timeout = 0;

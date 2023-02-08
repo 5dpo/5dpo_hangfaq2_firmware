@@ -4,6 +4,9 @@
 #include <Arduino.h>
 #include <Adafruit_MotorShield.h>
 
+#include <TimerOne.h>
+#include <TimerThree.h>
+
 #include "robotconfig.h"
 
 class Motor {
