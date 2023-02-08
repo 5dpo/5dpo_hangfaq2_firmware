@@ -56,10 +56,10 @@ void Robot::update(uint32_t &delta) {
 }
 
 void Robot::send(void) {
-  (*serialWriteChannel)('g', enc[0].odo);
-  (*serialWriteChannel)('h', enc[1].odo);
-  (*serialWriteChannel)('i', enc[2].odo);
-  (*serialWriteChannel)('j', enc[3].odo);
+  (*serialWriteChannel)('g', enc[0].tick);
+  (*serialWriteChannel)('h', enc[1].tick);
+  (*serialWriteChannel)('i', enc[2].tick);
+  (*serialWriteChannel)('j', enc[3].tick);
 
   (*serialWriteChannel)('k', dt);
 }

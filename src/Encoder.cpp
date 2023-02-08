@@ -1,5 +1,7 @@
 #include "Encoder.h"
 
+#pragma GCC optimize ("O3")
+
 const int8_t kEncoderTable[16] =
     {  0,  1, -1,  0,
       -1,  0,  0,  1,

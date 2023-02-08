@@ -63,7 +63,7 @@ void setup() {
   }
 
   Timer1.attachInterrupt(updateEncodersState);
-  Timer1.initialize(50);  // calls every 50us
+  Timer1.initialize(20);  // calls every X us
 
   // Serial communication
   Serial.begin(115200);
