@@ -77,14 +77,14 @@ void Robot::setMotorPWM(uint8_t index, int16_t pwm) {
 }
 
 void Robot::initEnc() {
-  pinMode(kMotEncPin0A, INPUT_PULLUP);
-  pinMode(kMotEncPin0B, INPUT_PULLUP);
-  pinMode(kMotEncPin1A, INPUT_PULLUP);
-  pinMode(kMotEncPin1B, INPUT_PULLUP);
-  pinMode(kMotEncPin2A, INPUT_PULLUP);
-  pinMode(kMotEncPin2B, INPUT_PULLUP);
-  pinMode(kMotEncPin3A, INPUT_PULLUP);
-  pinMode(kMotEncPin3B, INPUT_PULLUP);
+  pinMode(kMotEncPin0A, INPUT);
+  pinMode(kMotEncPin0B, INPUT);
+  pinMode(kMotEncPin1A, INPUT);
+  pinMode(kMotEncPin1B, INPUT);
+  pinMode(kMotEncPin2A, INPUT);
+  pinMode(kMotEncPin2B, INPUT);
+  pinMode(kMotEncPin3A, INPUT);
+  pinMode(kMotEncPin3B, INPUT);
 }
 
 void Robot::initCtrlPID(uint8_t index) {
