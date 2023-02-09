@@ -3,7 +3,7 @@
 This repository implements the firmware relative to the Hangfa Discovery Q2
 four-wheeled omnidirectional robotic platform.
 
-**Version 2.0.0**
+**Version 2.1.0**
 
 **With this version, it is possible to do:**
 
@@ -20,8 +20,7 @@ four-wheeled omnidirectional robotic platform.
 
 **Bugs identified in the current version:**
 
-- When wheels are turning fast, the tick counter seems to not be working
-  properly
+- None
 
 ## Hardware
 
@@ -29,6 +28,7 @@ four-wheeled omnidirectional robotic platform.
   ([info](http://www.hangfa.com/EN/robot/DiscoveryQ2.html))
 - Faulhaber DC Motor 2342L012CR_M124-Y2002_257
   ([datasheet](https://www.faulhaber.com/fileadmin/Import/Media/EN_2342_CR_DFF.pdf))
+  - 3K3 Ohms Resistors (pull-up resistor for the encoders channels)
 - Arduino Mega 2560 Rev3
   ([store](https://store.arduino.cc/products/arduino-mega-2560-rev3))
 - Arduino Mega Proto Shield Rev3
