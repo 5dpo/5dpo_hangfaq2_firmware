@@ -50,10 +50,10 @@ void setup() {
   serialWriteChannel('r', 0);
 
   // Test PWM motors
-  /*robot.setMotorPWM(0, -512);
-  robot.setMotorPWM(1, -512);
-  robot.setMotorPWM(2, -512);
-  robot.setMotorPWM(3, -512);*/
+  /*robot.setMotorPWM(0, 0);
+  robot.setMotorPWM(1, 0);
+  robot.setMotorPWM(2, 0);
+  robot.setMotorPWM(3, 0);*/
 
   // Initialization
   current_micros = micros();
@@ -80,6 +80,9 @@ void loop() {
       // Update and send data
       robot.update(delta);
       robot.send();
+
+      // Debug (Serial Monitor)
+      //serialWrite('\n');
 
       // Blink LED
       /*blink_led_decimate++;
