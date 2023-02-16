@@ -70,7 +70,7 @@ const unsigned long kMotCtrlFreq = 100UL;     //!< frequency (Hz)
 const float kMotCtrlTime = 1.0 / kMotCtrlFreq;//!< period (s)
 const unsigned long kMotCtrlTimeUs = 1000000UL / kMotCtrlFreq;
 const unsigned long kMotCtrlTimeout = 100UL;  //!< watchdog timeout (ms)
-const bool kMotCtrlTimeoutEnable = false;     //!< enable watchdog (true/false)
+const bool kMotCtrlTimeoutEnable = true;      //!< enable watchdog (true/false)
 
 const unsigned long kMotCtrlLEDOkFreq = 4UL;  //!< heartbeat LED frequency (Hz)
 const unsigned long kMotCtrlLEDOkCount =
