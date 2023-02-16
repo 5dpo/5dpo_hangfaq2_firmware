@@ -3,7 +3,7 @@
 This repository implements the firmware relative to the Hangfa Discovery Q2
 four-wheeled omnidirectional robotic platform.
 
-**Version 2.1.0**
+**Version 2.1.1**
 
 **With this version, it is possible to do:**
 
@@ -13,6 +13,8 @@ four-wheeled omnidirectional robotic platform.
 - Motors PWM control
   ([TimerOne](https://github.com/PaulStoffregen/TimerOne) and
   [TimerThree](https://github.com/PaulStoffregen/TimerThree) PWM)
+- Watchdog timer to disable the motors if the PC does not send anything for a
+  certain time
 
 **The next version will add these features:**
 
