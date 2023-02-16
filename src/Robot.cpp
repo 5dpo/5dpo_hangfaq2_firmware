@@ -62,9 +62,6 @@ void Robot::stop(void) {
   uint8_t i;
 
   for (i = 0; i < 4; i++) {
-    setMotorWref(i, 0);
-  }
-  for (i = 0; i < 4; i++) {
     setMotorPWM(i, 0);
   }
 }
