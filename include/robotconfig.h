@@ -78,7 +78,7 @@ const unsigned long kMotCtrlLEDOkCount =
 
 const float kMotVmax = 12;          //!< maximum voltage appliable to motors (V)
 const int16_t kMotPWMmax = 1023;    //!< maximum PWM (0..1023)
-const int16_t kMotPWMDeltaMax = 100;//!< maximum variation in PWM (0..1023)
+const int16_t kMotPWMDeltaMax = 150;//!< maximum variation in PWM (0..1023)
 const bool kMotPWMDeltaMaxEnabled = true; //!< enable limits on PWM variation
 
 const float kMotHammV0 = 0;         //!< estimated motors' deadzone (V)
