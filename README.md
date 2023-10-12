@@ -1,4 +1,4 @@
-# 5dpo_q2_firmware
+# [5dpo_hangfaq2_firmware](https://github.com/5dpo/5dpo_hangfaq2_firmware)
 
 This repository implements the firmware relative to the Hangfa Discovery Q2
 four-wheeled omnidirectional robotic platform.
@@ -90,8 +90,8 @@ four-wheeled omnidirectional robotic platform.
 1. Clone the repository
    ```sh
    # Clone repository
-   git clone git@github.com:5dpo/5dpo_q2_firmware.git
-   cd 5dpo_q2_firmware
+   git clone git@github.com:5dpo/5dpo_hangfaq2_firmware.git
+   cd 5dpo_hangfaq2_firmware
 
    # Open the folder as a project
    code .
@@ -105,3 +105,13 @@ four-wheeled omnidirectional robotic platform.
 1. Open `src/main.cpp`
 2. Compile the project using the PlatformIO extension in VS Code
    (PlatformIO on left-side navigation bar > Project Tasks > Upload)
+
+## Acknowledges
+
+- [Faculty of Engineering, University of Porto (FEUP)](https://sigarra.up.pt/feup/en/)
+- [INESC TEC - Institute for Systems and Computer Engineering, Technology and Science](https://www.inesctec.pt/en/)
+
+## Contacts
+
+If you have any questions or you want to know more about this work, please
+contact any member of the [5dpo Robotics Team](https://5dpo.github.io/).
